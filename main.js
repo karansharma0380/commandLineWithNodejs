@@ -70,11 +70,21 @@ function organizeHelper(src, dest){
         if(isFile){
             // console.log(childnames[i]);
             // 4. cut/copy files to that organized directory inside of any category folder
+            let category = getCategory(childnames[i]);
+            console.log(category);
+
 
         }
     }
 }
 
+function getCategory(name){
+    let ext = path.extname(name);
+    ext=ext.slice(1);
+    for(let type in types){
+        
+    }
+}
 
 
 function helpFn(){
