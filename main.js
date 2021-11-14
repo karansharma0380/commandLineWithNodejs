@@ -1,3 +1,5 @@
+#!/usr/bin/env node  
+//if you want to add anything to command like this is line helps you
 let path = require("path");
 let fs = require("fs");
 
@@ -35,7 +37,7 @@ switch(command){
 function treeFn(dirPath){
     console.log("Tree command implemented for ",dirPath);
     if(dirPath==undefined){
-        console.log("Please enter the valid path for command");
+        treeHelper(process.cwd(),"");
         return;
     }
     else{
@@ -73,7 +75,7 @@ function organizeFn(dirPath){
 // Pseudo code[what to do]
    let destPath;
     if(dirPath==undefined){
-        console.log("Please enter the valid path for command");
+        destPath=process.cwd();
         return;
     }
     else{
