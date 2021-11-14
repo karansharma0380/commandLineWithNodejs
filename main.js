@@ -71,19 +71,37 @@ function organizeHelper(src, dest){
             // console.log(childnames[i]);
             // 4. cut/copy files to that organized directory inside of any category folder
             let category = getCategory(childnames[i]);
-            console.log(category);
-
-
+            //console.log(category);
+            sendFiles(childAddress,dest,category);
         }
     }
+}
+
+function sendFiles(srcFilePath, dest, category){
+    let categoryPath=path.join(dest,category);
+    if(fs.existsSync(categoryPath)==false){
+        fs.mkdirSync(categoryPath);
+    }
+    let fileName= path.basename(srcFilePath);
+    let destFilePath=path.join(categoryPath,fileName);
+    fs.copyFileSync(srcFilePath,destFilePath);
+    //console.log(fileName," copied to ", category); Just to check everyting working fine or not.
+    //below line to perform cut operation
+    fs.unlinkSync(srcFilePath);
 }
 
 function getCategory(name){
     let ext = path.extname(name);
     ext=ext.slice(1);
     for(let type in types){
-        
+        let cTypeArray= types[type];
+        for(let i=0;i<cTypeArray.length;i++){
+            if(ext==cTypeArray[i]){
+                return type;
+            }
+        }
     }
+    return "others";
 }
 
 
